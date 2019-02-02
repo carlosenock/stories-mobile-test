@@ -12,9 +12,9 @@ import kotlinx.android.synthetic.main.adapter_story_item.view.*
 import java.util.*
 
 class StoryAdapter(
-    private var mList: List<Story>,
-    private var mContext: Context,
-    private val mItemListener: (Story) -> Unit
+    private var list: MutableList<Story>,
+    private var context: Context,
+    private val listener: (Story) -> Unit
 ) : RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
 
 
@@ -33,13 +33,13 @@ class StoryAdapter(
 
     override fun onBindViewHolder(holder: StoryAdapter.StoryViewHolder, position: Int) {
 
-        val story = mList[position]
-        holder.bindItems(story, mContext, mItemListener)
-        holder.itemView.setOnClickListener { mItemListener(story) }
+        val story = list[position]
+        holder.bindItems(story, context, listener)
+        holder.itemView.setOnClickListener { listener(story) }
     }
 
     override fun getItemCount(): Int {
-        return mList.size
+        return list.size
     }
 
     class StoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -48,14 +48,26 @@ class StoryAdapter(
             itemView.tv_author_date.text = context.getString(
                 R.string.author_date_format,
                 item.author,
-                DateUtils.getRelativeTimeSpanString(item.createdAtI, System.currentTimeMillis()/1000, 0L,DateUtils.FORMAT_ABBREV_ALL)
+                DateUtils.getRelativeTimeSpanString(
+                    item.createdAtI,
+                    System.currentTimeMillis() / 1000,
+                    0L,
+                    DateUtils.FORMAT_ABBREV_ALL
+                )
             )
             itemView.setOnClickListener { itemListener(item) }
         }
     }
 
     fun updateAdapter(items: List<Story>) {
-        this.mList = items
+        this.list.addAll(items)
+        this.list = this.list.sortedByDescending { it.createdAtI }.toMutableList()
         notifyDataSetChanged()
+    }
+
+    fun removeItem(position: Int) {
+        this.list.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, list.size)
     }
 }

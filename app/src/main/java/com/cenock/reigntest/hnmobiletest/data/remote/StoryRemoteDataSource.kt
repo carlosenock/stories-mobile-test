@@ -1,8 +1,8 @@
 package com.cenock.reigntest.hnmobiletest.data.remote
 
 import com.cenock.reigntest.hnmobiletest.data.StoryDataSource
-import com.cenock.reigntest.hnmobiletest.data.network.Callback
-import com.cenock.reigntest.hnmobiletest.data.network.NetworkClient
+import com.cenock.reigntest.hnmobiletest.data.remote.network.Callback
+import com.cenock.reigntest.hnmobiletest.data.remote.network.NetworkClient
 import com.cenock.reigntest.hnmobiletest.model.StoryResponse
 
 class StoryRemoteDataSource(private var client: NetworkClient) : StoryDataSource {

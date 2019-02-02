@@ -1,4 +1,4 @@
-package com.cenock.reigntest.hnmobiletest.data.network
+package com.cenock.reigntest.hnmobiletest.data.remote.network
 
 import android.util.Log
 import okhttp3.ResponseBody

@@ -28,6 +28,7 @@ class StoryPresenter(
 
     override fun onSuccess(stories: StoryResponse) {
         storyView.loadStories(stories.stories)
+        storyView.hideLoading()
     }
 
     override fun onError(code: Int, error: String) {

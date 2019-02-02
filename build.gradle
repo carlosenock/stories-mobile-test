@@ -43,6 +43,6 @@ ext {
     retrofitVersion = '2.3.0'
     loggingInterceptorVersion = '3.8.1'
 
-    koinVersion = '1.0.2'
+    roomVersion = '1.1.1'
 
 }
